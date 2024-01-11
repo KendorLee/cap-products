@@ -1,10 +1,20 @@
 namespace com.logali;
 
-
 //entity Customer {
 //    key ID   : Integer;
 //        name : String;
 //}
+
+//
+
+
+type Address {
+    Street     : String;
+    City       : String;
+    State      : String(2);
+    PostalCode : String(5);
+    Country    : String(3);
+};
 
 entity Products {
     key ID               : UUID; //Integer;
@@ -20,7 +30,7 @@ entity Products {
         Quantity         : Decimal(16, 2);
 };
 
-entity Supplier {
+entity Suppliers {
     key ID         : UUID;
         Name       : String;
         Street     : String;
@@ -31,6 +41,16 @@ entity Supplier {
         Email      : String;
         Phone      : String;
         Fax        : String;
+};
+
+
+entity Suppliers_01 {
+    key ID      : UUID;
+        Name    : String;
+        Address : Address;
+        Email   : String;
+        Phone   : String;
+        Fax     : String;
 };
 
 entity Category {
