@@ -1,3 +1,3 @@
-﻿ID,Name,Street,City,State,PostalCode,Country,Email,Phone,Fax
-,Exotic Liquids,NE 228th,Sammamish,WA,98074,USA,exotic.liquids@email.com,466 1234567,466 7654321
-,Tokyo Traders,NE 40th,Redmond,WA,98052,USA,tokyo.traders@email.com,466 9876543,466 3456789
+﻿ID,Name,address_Street,address_City,address_State,address_PostalCode,address_Country,Email,Phone,Fax
+08B8FD88,Exotic Liquids,NE 228th,Sammamish,WA,98074,USA,exotic.liquids@email.com,466 1234567,466 7654321
+08B8FD99,Tokyo Traders,NE 40th,Redmond,WA,98052,USA,tokyo.traders@email.com,466 9876543,466 3456789
