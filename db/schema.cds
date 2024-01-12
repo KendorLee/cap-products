@@ -5,9 +5,9 @@ namespace com.logali;
 //        name : String;
 //}
 
-// Types
+// Types >>>
 
-type Address {
+type Address {      // Structure Type
     Street     : String;
     City       : String;
     State      : String(2);
@@ -15,8 +15,29 @@ type Address {
     Country    : String(3);
 };
 
+// //type EmailsAddresses_01 : many {
+// type EmailsAddresses_01 : array of {
+//     kind  : String;
+//     email : String;
+// }
 
-// Entities
+// type EmailsAddresses_02 {   // Structure Type
+
+//     kind  : String;
+//     email : String;
+// }
+
+
+// Entities. >>>>
+
+// entity Emails {
+//     email_01 :      EmailsAddresses_01;     // Tipo ARRAY
+//     email_02 : many EmailsAddresses_02;     // Tipo Estructurado
+//     email_03 : many {                       // De forma directa...
+//         kind  : String;
+//         email : String;
+//     }
+// }
 
 entity Products {
     key ID               : UUID; //Integer;
