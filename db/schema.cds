@@ -5,8 +5,7 @@ namespace com.logali;
 //        name : String;
 //}
 
-//
-
+// Types
 
 type Address {
     Street     : String;
@@ -15,6 +14,9 @@ type Address {
     PostalCode : String(5);
     Country    : String(3);
 };
+
+
+// Entities
 
 entity Products {
     key ID               : UUID; //Integer;
