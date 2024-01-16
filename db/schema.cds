@@ -27,7 +27,7 @@ type Address { // Structure Type
 //     email : String;
 // }
 
-type Dec    : Decimal(16, 2);
+type Dec : Decimal(16, 2);
 
 // type Gender : String enum {
 //     male;
@@ -35,6 +35,14 @@ type Dec    : Decimal(16, 2);
 // }
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  ENTITIES
+
+entity Car {
+    key ID                 : UUID;
+        name               : String;
+        virtual discount_1 : Decimal;
+        virtual discount_2 : Decimal;
+}
+
 // entity Order {
 //     clientGender : Gender;
 //     status       : Integer enum {
@@ -67,7 +75,7 @@ entity Products {
         Description      : String;
         ImageURL         : String;
         ReleaseDate      : DateTime default $now;
-//      currentDate      : Date default currentDate;
+        //      currentDate      : Date default currentDate;
         DiscontinuedDate : DateTime;
         Price            : Dec;
         Height           : type of Price; //Decimal(16, 2);
