@@ -5,9 +5,9 @@ namespace com.logali;
 //        name : String;
 //}
 
-// Types >>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> TYPES
 
-type Address {      // Structure Type
+type Address { // Structure Type
     Street     : String;
     City       : String;
     State      : String(2);
@@ -27,8 +27,30 @@ type Address {      // Structure Type
 //     email : String;
 // }
 
+type Dec    : Decimal(16, 2);
 
-// Entities. >>>>
+// type Gender : String enum {
+//     male;
+//     female;
+// }
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  ENTITIES
+// entity Order {
+//     clientGender : Gender;
+//     status       : Integer enum {
+//         summited  = 1;
+//         fulfiller = 2;
+//         shipped   = 3;
+//         cancel    = -1;
+//     };
+//     //Cuando queremos FORZAR LOS VALORES que se asignan en la aplicacion durante el tiempo de ejecucion usamos lo siguiente:
+//     priority     : String @assert.rqnge enum {
+//         high;
+//         medium;
+//         low;
+//     }
+// }
+
 
 // entity Emails {
 //     email_01 :      EmailsAddresses_01;     // Tipo ARRAY
@@ -41,13 +63,14 @@ type Address {      // Structure Type
 
 entity Products {
     key ID               : UUID; //Integer;
-        Name             : String;
+        Name             : String not null; // default 'NoName';
         Description      : String;
         ImageURL         : String;
-        ReleaseDate      : DateTime;
+        ReleaseDate      : DateTime default $now;
+//      currentDate      : Date default currentDate;
         DiscontinuedDate : DateTime;
-        Price            : Decimal(16, 2);
-        Height           : Decimal(16, 2);
+        Price            : Dec;
+        Height           : type of Price; //Decimal(16, 2);
         Width            : Decimal(16, 2);
         Depth            : Decimal(16, 2);
         Quantity         : Decimal(16, 2);
@@ -55,7 +78,7 @@ entity Products {
 
 entity Suppliers {
     key ID      : UUID;
-        Name    : String;
+        Name    : type of Products : Name; // Products: Name    //String;
         Address : Address;
         Email   : String;
         Phone   : String;
