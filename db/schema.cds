@@ -36,12 +36,13 @@ type Dec : Decimal(16, 2);
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  ENTITIES
 
-entity Car {
-    key ID                 : UUID;
-        name               : String;
-        virtual discount_1 : Decimal;
-        virtual discount_2 : Decimal;
-}
+// entity Car {
+//     key ID                 : UUID;
+//         name               : String;
+//         virtual discount_1 : Decimal;
+//         @Core.Computed: false
+//         virtual discount_2 : Decimal;
+//}
 
 // entity Order {
 //     clientGender : Gender;
@@ -167,4 +168,34 @@ entity ProductReview {
 entity SalesData {
     key DeliveryDate : DateTime;
         Revenue      : Decimal(16, 2);
-}
+};
+
+entity SelProducts as select from Products;
+
+entity SelProducts3 as
+    select from Products
+    left join ProductReview
+    on Products.Name = ProductReview.Name
+    {
+        Rating,
+        Products.Name,
+        sum(
+            Price
+        ) as TotalPrice
+    }
+    group by 
+        Rating,
+        Products.Name
+    order by Rating;
+
+
+entity ProjProducts as projection on Products;
+
+entity ProjProducts2 as projection on Products{
+    *
+};
+
+entity ProjProducts3 as projection on Products{
+    ReleaseDate,
+    Name
+};
