@@ -170,6 +170,9 @@ entity SalesData {
         Revenue      : Decimal(16, 2);
 };
 
+
+// >>> 
+
 entity SelProducts as select from Products;
 
 entity SelProducts3 as
@@ -189,6 +192,7 @@ entity SelProducts3 as
     order by Rating;
 
 
+// >>> Proyecciones...
 entity ProjProducts as projection on Products;
 
 entity ProjProducts2 as projection on Products{
@@ -199,3 +203,12 @@ entity ProjProducts3 as projection on Products{
     ReleaseDate,
     Name
 };
+
+// >>> Entidades con PARAMETROS
+entity ParamProducts(pName: String) as
+    select from Products {
+        Name,
+        Price,
+        Queantity. 
+    }
+    where name = : pName;
