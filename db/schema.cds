@@ -171,44 +171,53 @@ entity SalesData {
 };
 
 
-// >>> 
+// >>>
 
-entity SelProducts as select from Products;
+entity SelProducts                   as select from Products;
 
-entity SelProducts3 as
+entity SelProducts3                  as
     select from Products
     left join ProductReview
-    on Products.Name = ProductReview.Name
+        on Products.Name = ProductReview.Name
     {
         Rating,
         Products.Name,
-        sum(
-            Price
-        ) as TotalPrice
+        sum(Price) as TotalPrice
     }
-    group by 
+    group by
         Rating,
         Products.Name
-    order by Rating;
+    order by
+        Rating;
 
 
 // >>> Proyecciones...
-entity ProjProducts as projection on Products;
+entity ProjProducts                  as projection on Products;
 
-entity ProjProducts2 as projection on Products{
-    *
-};
+entity ProjProducts2                 as
+    projection on Products {
+        *
+    };
 
-entity ProjProducts3 as projection on Products{
-    ReleaseDate,
-    Name
-};
+entity ProjProducts3                 as
+    projection on Products {
+        ReleaseDate,
+        Name
+    }
 
 // >>> Entidades con PARAMETROS
-entity ParamProducts(pName: String) as
-    select from Products {
+entity ParamProducts(pName : String) as
+    select
         Name,
         Price,
-        Queantity. 
-    }
-    where name = : pName;
+        Queantity
+    from Products
+    where
+        Name = :pName;
+
+// select from Products {
+//     Name,
+//     Price,
+//     Queantity
+// }
+// where name = : pName;
