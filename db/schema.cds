@@ -207,17 +207,20 @@ entity ProjProducts3                 as
 
 // >>> Entidades con PARAMETROS
 entity ParamProducts(pName : String) as
-    select
-        Name,
-        Price,
-        Queantity
-    from Products
-    where
-        Name = :pName;
+// Esta es una forma o MODELO
+select
+    Name,
+    Price,
+    Queantity
+from Products
+where
+    Name = :pName;
 
-// select from Products {
-//     Name,
-//     Price,
-//     Queantity
-// }
-// where name = : pName;
+// Este es otro MODELO
+    // select from Products {
+    //     Name,
+    //     Price,
+    //     Queantity
+    // }
+    // where
+    //     Name = :pName;
