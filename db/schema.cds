@@ -227,7 +227,7 @@ entity ParamProducts(pName : String) as
                                            select
     Name,
     Price,
-    Queantity
+    Quantity
 from Products
 where
     Name = : pName;
