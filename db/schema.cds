@@ -83,6 +83,22 @@ entity Products {
         Width            : Decimal(16, 2);
         Depth            : Decimal(16, 2);
         Quantity         : Decimal(16, 2);
+
+        // >>> ASOCIACION ADMINISTRADA POR EL FRAMEWORK
+        //
+        Supplier         : Association to one Suppliers;
+        ToUnitOfMeasure  : Association to UnitOfMeasures;
+
+// >>> ASOCIACION UNMANAGED o NO ADMINISTRADA POR EL FRAMEWORK
+//
+// // Asociacion establecida a travez de la parte NO MANEJADA es decir UNMANAGED o NO ADMINISTRADA POR EL FRAMEWORK
+// Supplier_Id       : UUID;      // Definicion de la Columna
+// ToSupplier        : Association to one Suppliers
+//                         on ToSupplier.ID = Supplier_Id;    // CRITERIO de como se establece esta RELACION con la Entidad de los Suppliers
+// UnitOfMeasures_Id : String(2);
+// ToUnitOfMeasure   : Association to UnitOfMeasures
+//                         on ToUnitOfMeasure.ID = UnitOfMeasures_Id; // Con la Entidad de las Unidades de Medida
+// <<<
 };
 
 entity Suppliers {
@@ -207,20 +223,20 @@ entity ProjProducts3                 as
 
 // >>> Entidades con PARAMETROS
 entity ParamProducts(pName : String) as
-// Esta es una forma o MODELO
-select
+                                       // Esta es una forma o MODELO
+                                           select
     Name,
     Price,
     Queantity
 from Products
 where
-    Name = :pName;
+    Name = : pName;
 
 // Este es otro MODELO
-    // select from Products {
-    //     Name,
-    //     Price,
-    //     Queantity
-    // }
-    // where
-    //     Name = :pName;
+// select from Products {
+//     Name,
+//     Price,
+//     Queantity
+// }
+// where
+//     Name = :pName;
