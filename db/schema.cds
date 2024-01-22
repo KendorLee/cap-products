@@ -71,26 +71,24 @@ type Dec : Decimal(16, 2);
 // }
 
 entity Products {
-    key ID               : UUID; //Integer;
-        Name             : String not null; // default 'NoName';
-        Description      : String;
-        ImageURL         : String;
-        ReleaseDate      : DateTime default $now;
+    key ID                 : UUID; //Integer;
+        Name               : String not null; // default 'NoName';
+        Description        : String;
+        ImageURL           : String;
+        ReleaseDate        : DateTime default $now;
         //      currentDate      : Date default currentDate;
-        DiscontinuedDate : DateTime;
-        Price            : Dec;
-        Height           : type of Price; //Decimal(16, 2);
-        Width            : Decimal(16, 2);
-        Depth            : Decimal(16, 2);
-        Quantity         : Decimal(16, 2);
+        DiscontinuedDate   : DateTime;
+        Price              : Dec;
+        Height             : type of Price; //Decimal(16, 2);
+        Width              : Decimal(16, 2);
+        Depth              : Decimal(16, 2);
+        Quantity           : Decimal(16, 2);
 
         // >>> ASOCIACION ADMINISTRADA POR EL FRAMEWORK
-        //
-        Supplier         : Association to one Suppliers;
-        ToUnitOfMeasure  : Association to UnitOfMeasures;
+        ToUnitOfMeasure    : Association to UnitOfMeasures;
+        Supplier           : Association to one Suppliers;
 
 // >>> ASOCIACION UNMANAGED o NO ADMINISTRADA POR EL FRAMEWORK
-//
 // // Asociacion establecida a travez de la parte NO MANEJADA es decir UNMANAGED o NO ADMINISTRADA POR EL FRAMEWORK
 // Supplier_Id       : UUID;      // Definicion de la Columna
 // ToSupplier        : Association to one Suppliers
@@ -99,6 +97,12 @@ entity Products {
 // ToUnitOfMeasure   : Association to UnitOfMeasures
 //                         on ToUnitOfMeasure.ID = UnitOfMeasures_Id; // Con la Entidad de las Unidades de Medida
 // <<<
+
+        // Supplier_Id      : UUID;        >>>>>>>>>>>>>>>>>>>>>>>>>> BORRAME!
+        // UnitOfMeasure_Id : String(2);   >>>>>>>>>>>>>>>>>>>>>>>>>> BORRAME!
+        // PriceCondition     : String(2); >>>>>>>>>>>>>>>>>>>>>>>>>> BORRAME!
+        // PriceDetermination : String(3); >>>>>>>>>>>>>>>>>>>>>>>>>> BORRAME!
+
 };
 
 entity Suppliers {
@@ -189,9 +193,9 @@ entity SalesData {
 
 // >>>
 
-entity SelProducts                   as select from Products;
+entity SelProducts   as select from Products;
 
-entity SelProducts3                  as
+entity SelProducts3  as
     select from Products
     left join ProductReview
         on Products.Name = ProductReview.Name
@@ -208,35 +212,46 @@ entity SelProducts3                  as
 
 
 // >>> Proyecciones...
-entity ProjProducts                  as projection on Products;
+entity ProjProducts  as projection on Products;
 
-entity ProjProducts2                 as
+entity ProjProducts2 as
     projection on Products {
         *
     };
 
-entity ProjProducts3                 as
+entity ProjProducts3 as
     projection on Products {
         ReleaseDate,
         Name
     }
 
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SQLite NO SOPORTA PAARAMETROS >>>>>>>>>>>>>>>>>>>>>>
 // >>> Entidades con PARAMETROS
-entity ParamProducts(pName : String) as
-                                       // Esta es una forma o MODELO
-                                           select
-    Name,
-    Price,
-    Quantity
-from Products
-where
-    Name = : pName;
+//entity ParamProducts(pName : String) as
+// // Esta es una forma o MODELO Y NO ES SOPORTADA POR SQLITE ...!!!!!!!!
+//    select
+//     Name,
+//     Price,
+//     Quantity
+// from Products
+// where
+//     Name = :pName;
 
-// Este es otro MODELO
+// //Este es otro MODELO
 // select from Products {
 //     Name,
 //     Price,
-//     Queantity
+//     Quantity
 // }
 // where
 //     Name = :pName;
+
+//entity ProjParamProducts(pName : String) as projection on Products where Name = : pName  
+
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SQLite NO SOPORTA PAARAMETROS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+extend Products with {
+    PriceCondition: String(2);
+    PriceDetermination: String(3);
+};
