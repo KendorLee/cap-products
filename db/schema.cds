@@ -85,7 +85,7 @@ entity Products {
         Quantity           : Decimal(16, 2);
 
         // >>> ASOCIACION ADMINISTRADA POR EL FRAMEWORK
-        ToUnitOfMeasure    : Association to UnitOfMeasures;
+        UnitOfMeasure    : Association to UnitOfMeasures;
         Supplier           : Association to one Suppliers;
 
 // >>> ASOCIACION UNMANAGED o NO ADMINISTRADA POR EL FRAMEWORK
